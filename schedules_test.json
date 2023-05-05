@@ -1,0 +1,57 @@
+{ 
+    "leaseschedule": 
+    {
+        "scheduleType": "SCHEDULE OF NOTICES OF LEASE",
+        "scheduleEntry": [
+            {
+                "entryNumber": "1",
+                "entryDate": "",
+                "entryType": "Schedule of Notices of Leases",
+                "entryText": [
+                    "28.01.2009      Transformer Chamber (Ground   23.01.2009      EGL551039  ",
+                    "tinted blue     Floor)                        99 years from              ",
+                    "(part of)                                     23.1.2009"
+                ]
+            },
+            {
+                "entryNumber": "562",
+                "entryDate": "",
+                "entryType": "Schedule of Notices of Leases",
+                "entryText": [
+                    "21.01.2011      Flat 3901 Landmark East       01.12.2010      AGL226281  ",
+                    "Edged and       Tower (thirty ninth floor     999 years from             ",
+                    "numbered 5 in   flat)                         and including              ",
+                    "blue (part of)                                01.01.2009                 ",
+                    "until and                  ",
+                    "including                  ",
+                    "31.12.3007"
+                ]
+            },
+            {
+                "entryNumber": "1",
+                "entryDate": "",
+                "entryType": "Schedule of Notices of Leases",
+                "entryText": [
+                    "13.11.1996      Retail Warehouse, The         25.07.1996      SY664660   ",
+                    "1 in yellow     Causeway and River Park       25 years from              ",
+                    "Avenue, Staines               25.3.1995                  ",
+                    "NOTE: The Lease comprises also other land"
+                ]
+            },
+            {
+                "entryNumber": "1",
+                "entryDate": "",
+                "entryType": "Schedule of Notices of Leases",
+                "entryText": [
+                    "21.11.1996      Transformer Site, Manor       16.09.1996      EGL352255  ",
+                    "1               Road                          25 years from              ",
+                    "16 September               ",
+                    "1996                       ",
+                    "NOTE 1: See entry in the Charges Register relating to the rights granted by this lease.",
+                    "The lease also affects other land",
+                    "NOTE 2: No copy of the Lease referred to is held by Land Registry."
+                ]
+            }
+        ]
+    }
+}
