@@ -4,9 +4,12 @@ from typing import List
 
 FIRST_LINE = 0
 SECOND_LINE = 1
-
 EMPTY_COLUMN = ''
 
+RE_DELIMIT_ON_TWO_SPACES = r"\s{2,}"
+RE_STARTS_WITH_NOTE = r"^NOTE:"
+RE_CAPTURE_NOTE = r"^NOTE:(.*)"
+RE_MATCH_WHITESPACE = r"\s{20,}"
 
 # Can't have mutable defaults as python will store these defaults as
 # 'Static' class attributes
@@ -34,7 +37,7 @@ def return_notices_text(entryText: list[str]) -> ScheduleOfNotices:
     # For each line in our entry
     for i in range(len(entryText)):
 
-        sections = re.split(r"\s{2,}", entryText[i])
+        sections = re.split(RE_DELIMIT_ON_TWO_SPACES, entryText[i])
         data_cols = len(sections)
 
         if i == FIRST_LINE:
@@ -42,10 +45,14 @@ def return_notices_text(entryText: list[str]) -> ScheduleOfNotices:
             schedule_dict["property_description"] += sections[1] + " "
             schedule_dict["date_of_lease_and_term"] += sections[2] + " "
             schedule_dict["lessee_title"] += sections[3] + " "
-        elif i == SECOND_LINE:
-            schedule_dict["reg_date_and_ref"] += sections[0] + " "
-            schedule_dict["property_description"] += sections[1] + " "
-            schedule_dict["date_of_lease_and_term"] += sections[2] + " "
+
+        elif re.match(RE_STARTS_WITH_NOTE, sections[0]):
+            # Capture our group
+            m = re.search(RE_CAPTURE_NOTE, sections[0])
+
+            # Append to list
+            schedule_dict["notes"].append(m.group(1).strip())
+
         else:
             # Switch on number of columns of data I have, with some of those
             # Possibly being whitespace
@@ -75,7 +82,6 @@ def return_notices_text(entryText: list[str]) -> ScheduleOfNotices:
     # Tidy up our string formatting for spaces
     for key, value in schedule_dict.items():
         if key == "notes":
-            # Process each item in this list
             continue
         else:
             schedule_dict[key] = value.strip()
