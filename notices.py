@@ -2,6 +2,11 @@ import re
 from dataclasses import dataclass, field
 from typing import List
 
+FIRST_LINE = 0
+SECOND_LINE = 1
+
+EMPTY_COLUMN = ''
+
 
 # Can't have mutable defaults as python will store these defaults as
 # 'Static' class attributes
@@ -26,22 +31,46 @@ def return_notices_text(entryText: list[str]) -> ScheduleOfNotices:
         "notes": []
     }
 
+    # For each line in our entry
     for i in range(len(entryText)):
-        sections = re.split(r"\s{2,}", entryText[i])
 
-        match i:
-            case 0:
-                schedule_dict["reg_date_and_ref"] += sections[0] + " "
-                schedule_dict["property_description"] += sections[1] + " "
-                schedule_dict["date_of_lease_and_term"] += sections[2] + " "
-                schedule_dict["lessee_title"] += sections[3] + " "
-            case 1:
-                schedule_dict["reg_date_and_ref"] += sections[0] + " "
-                schedule_dict["property_description"] += sections[1] + " "
-                schedule_dict["date_of_lease_and_term"] += sections[2] + " "
-            case 2:
-                schedule_dict["reg_date_and_ref"] += sections[0] + " "
-                schedule_dict["date_of_lease_and_term"] += sections[1] + " "
+        sections = re.split(r"\s{2,}", entryText[i])
+        data_cols = len(sections)
+
+        if i == FIRST_LINE:
+            schedule_dict["reg_date_and_ref"] += sections[0] + " "
+            schedule_dict["property_description"] += sections[1] + " "
+            schedule_dict["date_of_lease_and_term"] += sections[2] + " "
+            schedule_dict["lessee_title"] += sections[3] + " "
+        elif i == SECOND_LINE:
+            schedule_dict["reg_date_and_ref"] += sections[0] + " "
+            schedule_dict["property_description"] += sections[1] + " "
+            schedule_dict["date_of_lease_and_term"] += sections[2] + " "
+        else:
+            # Switch on number of columns of data I have, with some of those
+            # Possibly being whitespace
+            match data_cols:
+                case 4:
+                    # if (sections[END] == EMPTY_COLUMN)
+                    schedule_dict["reg_date_and_ref"] += sections[0] + " "
+                    schedule_dict["property_description"] += sections[1] + " "
+                    schedule_dict["date_of_lease_and_term"] += sections[2] + " "
+
+                case 3:
+                    # if (sections[END] == EMPTY_COLUMN)
+                    schedule_dict["reg_date_and_ref"] += sections[0] + " "
+                    schedule_dict["date_of_lease_and_term"] += sections[1] + " "
+
+                case 2:
+                    # I have two sections of data, one of those is whitespace
+                    if (sections[1] == EMPTY_COLUMN):
+                        schedule_dict["date_of_lease_and_term"] += sections[0] + " "
+                    else:
+                        schedule_dict["reg_date_and_ref"] += sections[0] + " "
+                        schedule_dict["date_of_lease_and_term"] += sections[1] + " "
+
+                case 1:
+                    schedule_dict["date_of_lease_and_term"] += sections[0] + " "
 
     # Tidy up our string formatting for spaces
     for key, value in schedule_dict.items():

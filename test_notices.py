@@ -23,19 +23,19 @@ test_data = [
                           "EGL551039",
                           []
                           )),
-    (test_entries[1],
+    (test_entries[1]["entryText"],
         ScheduleOfNotices("21.01.2011 Edged and numbered 5 in blue (part of)",
                           "Flat 3901 Landmark East Tower (thirty ninth floor flat)",
-                          "01.12.2010 999 years from and including 01.01.2009 until and including 31.12.2007",
+                          "01.12.2010 999 years from and including 01.01.2009 until and including 31.12.3007",
                           "AGL226281",
                           [])),
-    (test_entries[2],
+    (test_entries[2]["entryText"],
         ScheduleOfNotices("13.11.1996 1 in yellow",
                           "Retail Warehouse, The Causeway and River Park Avenue, Staines",
                           "25.07.1996 25 years from 25.3.1995",
                           "AGL226281",
                           ["The Lease comprises also other land"])),
-    (test_entries[3],
+    (test_entries[3]["entryText"],
         ScheduleOfNotices("21.11.1996 1",
                           "Transformer Site, Manor Road",
                           "16.09.1996 25 years from 16 September 1996",
@@ -46,6 +46,6 @@ test_data = [
 
 
 # Parameterize with a couple of known pairings
-@pytest.mark.parametrize("test_input,expected", [test_data[0]])
+@pytest.mark.parametrize("test_input,expected", [test_data[0], test_data[1]])
 def test_nominal(test_input: list[str], expected: ScheduleOfNotices):
     assert return_notices_text(test_input) == expected
