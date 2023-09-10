@@ -6,8 +6,8 @@ Coding challenge to read list of schedules taken from API after parsing using OC
 
 Used to compile and run the software
 
-* [python3] - language
-* [pytest] - testing framework
+* python3 - language
+* pytest - testing framework
 
 To run the smoke tests and functional tests (Used to drive TDD) run `pytest test_notices.py`
 
