@@ -1,6 +1,6 @@
 # Notices Coding Challenge
 
-Coding challenge to read list of schedules taken from API after parsing using OCR, and convert to internal structure to further analyze. Challenge taken to improve TDD and Python Skills. 
+Coding challenge to read list of schedules of leases taken from API after parsing using OCR, and convert to internal structure to further analyze downstream. Challenge taken to improve TDD and Python Skills. 
 
 ### Prerequisites
 
